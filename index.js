@@ -6,12 +6,13 @@ const connectToDb = require("./database/db");
 
 connectToDb();
 const app = express();
+const port = process.env.PORT || 3000;
 
-// Configurações da aplicação
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded());
 app.use(routes);
 
-// Exporta o app para Vercel
-module.exports = app;
+app.listen(port, () =>
+  console.log(`Servidor rodando em http://localhost:${port}`)
+);
